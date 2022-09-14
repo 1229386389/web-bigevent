@@ -1,6 +1,19 @@
 $(function() {
 // 获取用户的基本信息
 getUserInfo()
+//点击退出按钮
+$('#btnLogout').on('click',function(){
+	layer.confirm('是否退出',{icon: 3, title:'提示'},function(index){
+  //清空本地存储中的token
+   localStorage.removeItem('token')
+   //跳转指定界面
+   location.href='/login.html'
+   //关闭confirm提示框
+  layer.close(index);
+});       
+})
+})
+//将函数定义在入口函数之外使其成为全局函数，子页面也可以访问到父页面的方法
 function getUserInfo() {
   $.ajax({
     method: 'GET',
@@ -41,14 +54,5 @@ function renderAvatar(data){
     }
 	
 }
-$('#btnLogout').on('click',function(){
-	layer.confirm('是否退出',{icon: 3, title:'提示'},function(index){
-  //清空本地存储中的token
-   localStorage.removeItem('token')
-   //跳转指定界面
-   location.href='/login.html'
-   //关闭confirm提示框
-  layer.close(index);
-});       
-})
-})
+
+
